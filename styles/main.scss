@@ -1,9 +1,156 @@
-$primary-color: #A37;
-
-#title {
-	  color: $primary-color;
+$font-stack:    Helvetica, arial, sans-serif;
+$primary-color: #E90053;
+$wrapper-width: 300px;
+$wrapper-height: 600px;
+$inside-width: 268px;
+$inside-height: 570px;
+body, html{
+	height: 100%;
+	padding: 0;
+	margin: 0;
 }
+#card-wrapper{
+  width: $wrapper-width;
+  height: $wrapper-height;
+  margin: 0 auto;
+  margin-top: 50px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+  font-family: $font-stack;
 
-h1 { 
-	text-align: center;
- }
+  div.align{
+    width: $inside-width;
+    height: 286px;
+    margin: 0 auto;
+    display: block;
+    padding-top: 20px;
+    position: relative;
+    // background-color: $primary-color;
+
+    select{
+      width: 100%;
+      height: 40px;
+      background-color: #eaeaea;
+      outline: none;
+      display: block;
+      border: none;
+      -webkit-appearance: none;
+      -webkit-border-radius: 0px;
+      text-indent: 10px;
+      /* reset */
+      margin: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      /* arrow redesign */
+      background-image:
+      linear-gradient(45deg, transparent 50%, gray 50%),
+      linear-gradient(135deg, gray 50%, transparent 50%),
+      linear-gradient(to right, #ccc, #ccc);
+      background-position:
+        calc(100% - 20px) calc(1em + 5px),
+        calc(100% - 15px) calc(1em + 5px),
+        calc(100% - 2.5em) 0.5em;
+      background-size:
+        5px 5px,
+        5px 5px,
+        0px 1.5em;
+      background-repeat: no-repeat;
+    }
+
+    img{
+      display: block;
+      width: 170px;
+      position: absolute;
+      bottom: 0;
+      /*margin: 0 auto; */
+    }
+    .team{
+      width: 70px;
+      height: 70px;
+      background-color: #ffffff;
+      border-radius: 50px;
+      top: 245px;
+      z-index: 10;
+			margin: 0;
+			padding: 0;
+      left:180px;
+      position: absolute;
+			overflow: hidden;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+
+			div{
+	      padding: 0;
+				position: relative;
+				top: 0;
+				bottom: 0;
+				margin: 0 auto;
+				/*margin-top: 15px;*/
+				display: block;
+				/*background-color: rgba(227, 227, 227, 1);*/
+				/*zoom: .6;*/
+				-webkit-transform: scale(.6); /* Chrome, Safari, Opera */
+				-moz-transform: scale(.6);
+	      /*background-image: url("/img/sprite.png");*/
+	      background-repeat: no-repeat;
+	    }
+    }
+  }
+
+  #stats{
+    width: 100%;
+    height: 315px;
+    margin: 0;
+    padding: 0;
+    background-color: $primary-color;
+
+    div{
+      width: $inside-width;
+      height: auto;
+			margin: 0 auto;
+			padding-top: 20px;
+    }
+
+    h2{
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      font-weight: normal;
+      font-size: 1.2em;
+    }
+
+     h4{
+       color: #ffffff;
+       margin: 0;
+       padding: 0;
+       font-weight: lighter;
+       font-size: 0.9em;
+       margin-top: 10px;
+     }
+
+     ul{
+       width: 100%;
+       margin: 0;
+       padding: 0;
+       margin-top: 20px;
+       list-style: none;
+
+       li{
+         height: 40px;
+         line-height: 40px;
+         text-indent: 10px;
+         color: #333333;
+         box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.14);
+         margin-bottom: 2px;
+         background-color: #eaeaea;
+
+         strong{
+           float: right;
+           margin-right: 10px;
+         }
+       }
+     }
+  }
+}
