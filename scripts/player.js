@@ -10,12 +10,14 @@ var Player = function(id, name, position, stats, team, mainPosition){
   this.team = team;
   this.mainPosition = mainPosition;
 };
+
 // update image src in DOM
 Player.prototype.updateImage = function(){
   var imageElem = document.getElementById("player-image");
   var url = "/img/p" + this.id + ".png";
   imageElem.setAttribute("src", url);
 };
+
 // update player name and position in DOM
 Player.prototype.playerDetails = function(){
   var nameElem = document.getElementById("name");
@@ -25,6 +27,7 @@ Player.prototype.playerDetails = function(){
   positionElem.innerHTML = this.mainPosition;
   teamElem.setAttribute("class", "icon-" + this.team);
 };
+
 // update player stats in the DOM
 Player.prototype.updateStats = function(){
   var appearancesElem = document.getElementById("appearances");
@@ -39,6 +42,7 @@ Player.prototype.updateStats = function(){
   perMatchElem.innerHTML = "Goals per match <strong>" + this.goalsPerMatch + "</strong>";
   perMinuteElem.innerHTML = "Passes per minute <strong>" + this.passesPerMinute + "</strong>";
 };
+
 // render the UI with new player object
 Player.prototype.render = function(){
   this.updateImage();

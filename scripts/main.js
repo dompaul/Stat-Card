@@ -3,14 +3,13 @@ var app = {
   url: "/player-stats.json",
   // Initialise app
   init: function(){
-    var me = this;
-    this.getJSON(this.url, function(err, data){
+    var _self = this;
+    _self.getJSON(this.url, function(err, data){
       if (err !== null) {
-        console.log('Something went wrong: ' + err);
+        console.warn('Something went wrong: ' + err);
       } else {
-        me.loadSelect(data.players);
-        console.log(data);
-        me.bindEvents(data);
+        _self.loadSelect(data.players);
+        _self.bindEvents(data);
       }
     });
   },
@@ -54,6 +53,7 @@ var app = {
    * @param: {Number} - Number of forward passes
    * @param: {Number} - Number of back passes
    * @param: {Number} - Number of minutes played
+   * @return {Object} - Calculated stats for Goals per Match and Passes per Minute
    */
   calculateData: function(appearances, goals, assists, forwardPasses, backPasses, minsPlayed){
     var goalsPerMatch = Math.round((goals / appearances) * 100) / 100;
@@ -65,6 +65,7 @@ var app = {
   },
   /** retrieve JSON data via URL
    * @param: {Object} - Object with all statistical player data
+   * @return {Object} - Calculated stats card with all relevant pieces
    */
   getStats: function(data){
     var appearances = "";
@@ -114,34 +115,37 @@ var app = {
       "passesPerMinute": sumData.passesPerMinute
     };
   },
+  /** Map the position of the player with the correct key
+   * @param: {String} - String containing multiple positions for the player
+   * @return {Object} - Selected single position for the player
+   */
   mapPosition: function(position){
     var positions = {"D": "Defender","M": "Midfielder","F": "Striker"};
     var playerPosition = positions[position];
     return playerPosition;
   },
   collectPlayerData: function(data, id){
-    var me = this;
+    var _self = this;
 
     var name = "";
     var positionInfo = "";
     var mainPosition = "";
     var team = "";
 
-    for (var item = 0; item != data.length; item++) {
-      var playerId = data[item].player.id;
-      var player = data[item].player;
-      var playerStats = data[item].stats;
-
-      if (id == playerId) {
+    data.forEach(function(item, i, mapObj){
+      var playerId = item.player.id;
+      var player = item.player;
+      var playerStats = item.stats;
+      if (parseInt(id) === parseInt(playerId)) {
         name = player.name.first + " " + player.name.last;
         positionInfo = player.info.positionInfo;
         mainPosition = player.info.position;
         team = player.currentTeam.id;
-        var stats = me.getStats(playerStats);
-        var position = me.mapPosition(mainPosition);
-        me.renderStatCard(id, name, positionInfo, stats, team, position);
+        var stats = _self.getStats(playerStats);
+        var position = _self.mapPosition(mainPosition);
+        _self.renderStatCard(id, name, positionInfo, stats, team, position);
       }
-    }
+    });
   },
   /** render the new stat card
    * @param: {Number} - Player ID Number
@@ -152,17 +156,18 @@ var app = {
    * @param: {String} - Player main position
    */
   renderStatCard: function(id, name, position, stats, team, mainPosition){
-    this.template = new Player(id, name, position, stats, team, mainPosition);
-    this.template.render();
+    var _self = this;
+    _self.template = new Player(id, name, position, stats, team, mainPosition);
+    _self.template.render();
   },
   /** Handle click events and user behaviour
    * @param: {Object} - player data
    */
   bindEvents: function(playerData){
-    var me = this;
+    var _self = this;
     var select = document.getElementById("select");
     var firstOption = select.options[0].value;
-    this.collectPlayerData(playerData.players, firstOption);
+    _self.collectPlayerData(playerData.players, firstOption);
 
     select.onchange = function(event){
       var selectedOption = this.options[this.selectedIndex].value;
@@ -170,7 +175,7 @@ var app = {
        * @param: {Object} - player data
        * @param: {Number} - selected player ID
        */
-       me.collectPlayerData(playerData.players, selectedOption);
+       _self.collectPlayerData(playerData.players, selectedOption);
     };
   }
 };

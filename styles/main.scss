@@ -25,7 +25,11 @@ body, html{
     display: block;
     padding-top: 20px;
     position: relative;
-    // background-color: $primary-color;
+		background: url(../img/bg.png) no-repeat right center;
+  	-webkit-background-size: 270px;
+  	-moz-background-size: 270px;
+  	-o-background-size: 270px;
+  	background-size: 270px;
 
     select{
       width: 100%;

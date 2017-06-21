@@ -8,6 +8,7 @@
     "gulp.spritesmith": "^6.5.0"
   },
   "dependencies": {
+    "gulp": "^3.9.1",
     "uglify-js": "^3.0.18"
   }
 }
